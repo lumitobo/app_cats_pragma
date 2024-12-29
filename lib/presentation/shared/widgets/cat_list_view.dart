@@ -1,5 +1,5 @@
-import 'package:cats_pragma/presentation/shared/widgets/search_bar.dart';
-import 'package:cats_pragma/presentation/shared/widgets/sliver_appBar.dart';
+import 'package:CatsBreed/presentation/shared/widgets/search_bar.dart';
+import 'package:CatsBreed/presentation/shared/widgets/sliver_appBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -64,14 +64,12 @@ class CatListView extends ConsumerWidget {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          status == ConnectivityStatus.isConnected ? 'Is Connected to Internet' : 'Is Disconnected from Internet',
+          status == ConnectivityStatus.isConnected ? 'Is connected to Internet' : 'Is disconnected from Internet',
           style: const TextStyle(color: Colors.white, fontSize: 18),
         ),
         backgroundColor: status == ConnectivityStatus.isConnected ? Colors.green : Colors.red,
       ),
     );
   }
-
-
 
 }

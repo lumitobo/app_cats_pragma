@@ -17,9 +17,9 @@ class _SearchBarState extends ConsumerState<CustomSearchBar> {
   Widget build(BuildContext context) {
     final catState = ref.watch(catProvider);
     return SearchBar(
-      padding: WidgetStateProperty.all(
-        EdgeInsets.symmetric(horizontal: 20.0),
-      ),
+      padding: WidgetStateProperty.all(EdgeInsets.symmetric(horizontal: 20.0)),
+      // backgroundColor: WidgetStateProperty.all(Colors.purple.shade100),
+      shadowColor: WidgetStateProperty.all(Colors.purple.shade200),
       controller: searchBarController,
       hintText: 'Search cats...',
       onTapOutside: (_) => FocusScope.of(context).unfocus(),

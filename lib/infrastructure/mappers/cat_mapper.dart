@@ -1,5 +1,5 @@
-import 'package:cats_pragma/domain/entities/cat.dart';
-import 'package:cats_pragma/infrastructure/models/cat_model.dart';
+import 'package:CatsBreed/domain/entities/cat.dart';
+import 'package:CatsBreed/infrastructure/models/cat_model.dart';
 
 class CatNetworkMapper {
 

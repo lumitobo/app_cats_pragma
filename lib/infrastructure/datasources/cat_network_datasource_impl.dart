@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:cats_pragma/domain/datasources/cat_network_datasource.dart';
-import 'package:cats_pragma/domain/entities/cat.dart';
-import 'package:cats_pragma/infrastructure/mappers/cat_mapper.dart';
+import 'package:CatsBreed/domain/datasources/cat_network_datasource.dart';
+import 'package:CatsBreed/domain/entities/cat.dart';
+import 'package:CatsBreed/infrastructure/mappers/cat_mapper.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;

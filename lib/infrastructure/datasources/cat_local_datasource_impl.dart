@@ -1,17 +1,14 @@
 import 'dart:convert';
 
-import 'package:cats_pragma/domain/datasources/cat_local_datasource.dart';
-import 'package:cats_pragma/domain/datasources/cat_network_datasource.dart';
-import 'package:cats_pragma/domain/entities/cat.dart';
-import 'package:cats_pragma/infrastructure/mappers/cat_mapper.dart';
+import 'package:CatsBreed/domain/datasources/cat_local_datasource.dart';
+import 'package:CatsBreed/domain/entities/cat.dart';
+import 'package:CatsBreed/infrastructure/mappers/cat_mapper.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../domain/enums/error_messages.dart';
 import '../models/cat_model.dart';
-
 
 
 class CatLocalDatasourceImpl implements CatLocalDatasource {

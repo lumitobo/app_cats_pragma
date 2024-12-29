@@ -19,12 +19,15 @@ class CatScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          CachedNetworkImage(
-            imageUrl: cat!.getImage,
-            fit: BoxFit.cover,
-            width: double.infinity,
-            errorWidget: (context, url, error) =>  Image.asset('assets/images/no_image.jpg', fit: BoxFit.cover),
-            placeholder: (context, url) => Image.asset('assets/loaders/puntos_loading.gif', fit: BoxFit.cover),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(5),
+            child: CachedNetworkImage(
+              imageUrl: cat!.getImage,
+              fit: BoxFit.cover,
+              width: double.infinity,
+              errorWidget: (context, url, error) =>  Image.asset('assets/images/no_image.jpg', fit: BoxFit.cover),
+              placeholder: (context, url) => Image.asset('assets/loaders/puntos_loading.gif', fit: BoxFit.cover),
+            ),
           ),
           const SizedBox(height: 10,),
           CatInfo(cat: cat!)
