@@ -1,4 +1,4 @@
-name: cats_pragma
+name: CatsBreed
 description: "Prueba tecnica para desarrollador Flutter en Pragma."
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
@@ -36,15 +36,16 @@ dev_dependencies:
   flutter_lints: ^5.0.0
 
 flutter_native_splash:
-  color: "#ffffff"
+  color: "#6429cd"
   android: true
   ios: true
   web: false
   image: assets/images/cat_splash.png
+  branding: assets/images/branding.png
   android_12:
-    color: "#ffffff"
+    color: "#6429cd"
     image: assets/images/cat_splash.png
-#    branding: assets/images/branding.png
+    branding: assets/images/branding.png
 
 
 flutter:
