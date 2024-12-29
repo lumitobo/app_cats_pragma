@@ -1,8 +1,7 @@
-
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-enum ConnectivityStatus { notDetermined, isConnected, isDisonnected }
+import '../../domain/enums/conectivity_status_enum.dart';
 
 class ConnectivityStatusNotifier extends StateNotifier<ConnectivityStatus> {
 
@@ -35,6 +34,6 @@ class ConnectivityStatusNotifier extends StateNotifier<ConnectivityStatus> {
   }
 }
 
-final connectivityStatusProviders = StateNotifierProvider<ConnectivityStatusNotifier, ConnectivityStatus>((ref) {
+final connectivityStatusProvider = StateNotifierProvider<ConnectivityStatusNotifier, ConnectivityStatus>((ref) {
   return ConnectivityStatusNotifier();
 });

@@ -3,9 +3,11 @@ import 'dart:convert';
 import 'package:cats_pragma/domain/datasources/cat_network_datasource.dart';
 import 'package:cats_pragma/domain/entities/cat.dart';
 import 'package:cats_pragma/infrastructure/mappers/cat_mapper.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 
+import '../../domain/enums/error_messages.dart';
 import '../models/cat_model.dart';
 
 
@@ -17,7 +19,7 @@ class CatNetworkDatasourceImpl implements CatNetworkDatasource {
   CatNetworkDatasourceImpl({required this.client});
 
   @override
-  Future<List<Cat>> getCats() async {
+  Future<Either<ErrorMessages, List<Cat>>> getCats() async {
     final response = await client.get(
       Uri.https(baseUrl, '/v1/breeds'),
       headers: {'x-api-key': 'live_99Qe4Ppj34NdplyLW67xCV7Ds0oSLKGgcWWYnSzMJY9C0QOu0HUR4azYxWkyW2nr'},
@@ -28,18 +30,20 @@ class CatNetworkDatasourceImpl implements CatNetworkDatasource {
       List<Cat> listCats = [];
       final List decodedJson = json.decode(response.body) as List;
       try {
-        decodedJson.map<CatModel>((jsonCatModel) => CatModel.fromJson(jsonCatModel)).toList();
-        final List<CatModel> catModels = decodedJson.map<CatModel>((jsonCatModel) => CatModel.fromJson(jsonCatModel)).toList();
+        decodedJson.map<CatModel>((catModel) => CatModel.fromJson(catModel)).toList();
+        final List<CatModel> catModels = decodedJson.map<CatModel>((catModel) => CatModel.fromJson(catModel)).toList();
 
         listCats = catModels.map((oferta) => CatNetworkMapper.cataModelToEntity(oferta)).toList();
 
       } catch (e) {
         debugPrint(e.toString());
+        return left(ErrorMessages.responseNotMapped);
       }
 
-      return listCats;
+      return Right(listCats);
 
     } else {
+      return left(ErrorMessages.serverError);
       throw Exception();
     }
   }

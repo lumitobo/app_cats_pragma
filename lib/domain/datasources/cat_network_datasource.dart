@@ -1,9 +1,11 @@
 
+import 'package:dartz/dartz.dart';
+
 import '../entities/cat.dart';
+import '../enums/error_messages.dart';
 
 abstract class CatNetworkDatasource {
 
-  Future<List<Cat>> getCats();
-  // Future<Unit> cachePosts(List<CatModel> catModels);
+  Future<Either<ErrorMessages, List<Cat>>> getCats();
 
 }

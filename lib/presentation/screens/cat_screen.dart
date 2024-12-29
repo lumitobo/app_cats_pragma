@@ -7,22 +7,15 @@ import '../shared/widgets/cat_info.dart';
 
 class CatScreen extends StatelessWidget {
   final Cat? cat;
-  const CatScreen({
-    super.key,
-    required this.cat,
-  });
+  const CatScreen({super.key, required this.cat});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          cat!.name,
-          style: const TextStyle(color: Colors.black),
-        ),
-        leading: const BackButton(
-          color: Colors.black,
-        ),
+        centerTitle: true,
+        title: Text(cat!.name, style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w800)),
+        leading: const BackButton(color: Colors.black),
       ),
       body: Column(
         children: [
@@ -30,11 +23,8 @@ class CatScreen extends StatelessWidget {
             imageUrl: cat!.getImage,
             fit: BoxFit.cover,
             width: double.infinity,
-            height: MediaQuery.of(context).size.height / 2.2,
-            placeholder: (context, url) => const Center(
-              child: CircularProgressIndicator(),
-            ),
-            errorWidget: (context, url, error) => const Text('ERROR_IMAGE_NETWORK'),
+            errorWidget: (context, url, error) =>  Image.asset('assets/images/no-image.jpg', fit: BoxFit.cover),
+            placeholder: (context, url) => Image.asset('assets/loaders/puntos_loading.gif', fit: BoxFit.cover),
           ),
           const SizedBox(height: 10,),
           CatInfo(cat: cat!)
