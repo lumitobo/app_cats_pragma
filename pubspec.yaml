@@ -36,8 +36,16 @@ dev_dependencies:
   flutter_lints: ^5.0.0
 
 flutter_native_splash:
-  color: "#531db9"
-  image: "assets/images/cat_splash.png"
+  color: "#ffffff"
+  android: true
+  ios: true
+  web: false
+  image: assets/images/cat_splash.png
+  android_12:
+    color: "#ffffff"
+    image: assets/images/cat_splash.png
+#    branding: assets/images/branding.png
+
 
 flutter:
 
