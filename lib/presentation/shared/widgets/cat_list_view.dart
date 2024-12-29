@@ -23,7 +23,7 @@ class CatListView extends ConsumerWidget {
     });
 
     if (catState.isLoading) {
-      return Center(child: CircularProgressIndicator());
+      return Center(child: CircularProgressIndicator(color: Colors.purple,));
     }
 
     return CustomScrollView(

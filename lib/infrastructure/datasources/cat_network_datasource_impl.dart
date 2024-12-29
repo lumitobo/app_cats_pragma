@@ -32,7 +32,6 @@ class CatNetworkDatasourceImpl implements CatNetworkDatasource {
       try {
         decodedJson.map<CatModel>((catModel) => CatModel.fromJson(catModel)).toList();
         final List<CatModel> catModels = decodedJson.map<CatModel>((catModel) => CatModel.fromJson(catModel)).toList();
-
         listCats = catModels.map((oferta) => CatNetworkMapper.cataModelToEntity(oferta)).toList();
 
       } catch (e) {

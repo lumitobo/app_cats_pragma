@@ -22,7 +22,15 @@ class CatRepositoryImpl extends CatRepository {
   Future<Either<ErrorMessages, List<Cat>>> getCats() async {
     if(ConnectivityStatus.isConnected == conectivityStatus){
       final result = await networkDatasource.getCats();
-      return result;
+      return result.fold(
+        (error) {
+          return Left(error);
+        },
+        (cats) {
+          localDatasource.saveCats(cats);
+          return Right(cats);
+        },
+      );
       // final List<Cat> cats = await networkDatasource.getCats();
       // localDatasource.saveCats(cats);
       // return Future.value(cats);

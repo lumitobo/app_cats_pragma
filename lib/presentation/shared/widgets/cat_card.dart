@@ -19,23 +19,20 @@ class CatCardWidget extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 10),
         child: Column(
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(cat.name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: TextButton(
+            Padding(
+              padding: const EdgeInsets.only(top: 8, right: 10, bottom: 8, left:  15),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(cat.name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  TextButton(
                     onPressed: () {
                       context.push('/cat', extra: cat);
                     },
-                    child: const Text('See details...', style: TextStyle(fontSize: 16)),
+                    child: const Text('See details...', style: TextStyle(fontSize: 16, color: Colors.purple)),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             GestureDetector(
               onTap: () => context.push('/cat', extra: cat),
@@ -45,7 +42,7 @@ class CatCardWidget extends StatelessWidget {
                   imageUrl: cat.getImage,
                   fit: BoxFit.cover,
                   width: double.infinity,
-                  errorWidget: (context, url, error) =>  Image.asset('assets/images/no-image.jpg', fit: BoxFit.cover),
+                  errorWidget: (context, url, error) =>  Image.asset('assets/images/no_image.jpg', fit: BoxFit.cover),
                   placeholder: (context, url) => Image.asset('assets/loaders/puntos_loading.gif', fit: BoxFit.cover),
                 ),
               ),

@@ -23,7 +23,7 @@ class CatScreen extends StatelessWidget {
             imageUrl: cat!.getImage,
             fit: BoxFit.cover,
             width: double.infinity,
-            errorWidget: (context, url, error) =>  Image.asset('assets/images/no-image.jpg', fit: BoxFit.cover),
+            errorWidget: (context, url, error) =>  Image.asset('assets/images/no_image.jpg', fit: BoxFit.cover),
             placeholder: (context, url) => Image.asset('assets/loaders/puntos_loading.gif', fit: BoxFit.cover),
           ),
           const SizedBox(height: 10,),

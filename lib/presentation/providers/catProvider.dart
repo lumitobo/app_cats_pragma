@@ -61,12 +61,12 @@ class CatNotifier extends StateNotifier<CatState> {
   Future<void> loadAllCats() async {
 
     try {
-      state = state.copyWith(isLoading: true);
+      state = state.copyWith(isLoading: true, errorMessage: '');
 
       final result = await catRepository.getCats();
       result.fold(
         (error) => state = state.copyWith(isLoading: false, errorMessage: error.message),
-        (cats) => state = state.copyWith(isLoading: false, cats: cats),
+        (cats) => state = state.copyWith(isLoading: false, cats: cats, errorMessage: ''),
       );
 
     } catch (e) {
