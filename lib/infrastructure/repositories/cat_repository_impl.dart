@@ -31,15 +31,10 @@ class CatRepositoryImpl extends CatRepository {
           return Right(cats);
         },
       );
-      // final List<Cat> cats = await networkDatasource.getCats();
-      // localDatasource.saveCats(cats);
-      // return Future.value(cats);
     }
     else{
       final result = await localDatasource.getCats();
       return result;
-      // final List<Cat> cats = await localDatasource.getCats();
-      // return cats;
     }
   }
 

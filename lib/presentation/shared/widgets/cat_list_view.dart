@@ -1,5 +1,5 @@
-import 'package:CatsBreed/presentation/shared/widgets/search_bar.dart';
-import 'package:CatsBreed/presentation/shared/widgets/sliver_appBar.dart';
+import 'package:catsBreed/presentation/shared/widgets/search_bar.dart';
+import 'package:catsBreed/presentation/shared/widgets/sliver_appBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -26,34 +26,38 @@ class CatListView extends ConsumerWidget {
       return Center(child: CircularProgressIndicator(color: Colors.purple,));
     }
 
-    return CustomScrollView(
-      slivers: [
-        SliverPersistentHeader(
-          pinned: true,
-          floating: true,
-          delegate: SliverAppBarDelegate(
-            minHeight: 0,
-            maxHeight: 70,
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              decoration: BoxDecoration(
-                color: Theme.of(context).scaffoldBackgroundColor,
-                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30))
+    return RefreshIndicator(
+      color: Colors.purple,
+      onRefresh: () => ref.read( catProvider.notifier ).loadAllCats(),
+      child: CustomScrollView(
+        slivers: [
+          SliverPersistentHeader(
+            pinned: true,
+            floating: true,
+            delegate: SliverAppBarDelegate(
+              minHeight: 0,
+              maxHeight: 70,
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                decoration: BoxDecoration(
+                  color: Theme.of(context).scaffoldBackgroundColor,
+                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(30), bottomRight: Radius.circular(30))
+                ),
+                child: CustomSearchBar(),
               ),
-              child: CustomSearchBar(),
             ),
           ),
-        ),
-        catState.filteredCats.isEmpty ? buildEmpty() :
-        SliverList(
-          delegate: SliverChildBuilderDelegate((context, index) {
-            final cat = catState.filteredCats[index];
-            return CatCardWidget(cat: cat);
-          },
-            childCount: catState.filteredCats.length,
+          catState.filteredCats.isEmpty ? buildEmpty() :
+          SliverList(
+            delegate: SliverChildBuilderDelegate((context, index) {
+              final cat = catState.filteredCats[index];
+              return CatCardWidget(cat: cat);
+            },
+              childCount: catState.filteredCats.length,
+            ),
           ),
-        ),
-      ]
+        ]
+      ),
     );
   }
 

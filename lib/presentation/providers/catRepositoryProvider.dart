@@ -1,6 +1,6 @@
 
 
-import 'package:CatsBreed/presentation/providers/catDatasourcesProviders.dart';
+import 'package:catsBreed/presentation/providers/catDatasourcesProviders.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/repositories/cat_repository.dart';

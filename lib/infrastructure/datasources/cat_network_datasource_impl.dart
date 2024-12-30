@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:CatsBreed/domain/datasources/cat_network_datasource.dart';
-import 'package:CatsBreed/domain/entities/cat.dart';
-import 'package:CatsBreed/infrastructure/mappers/cat_mapper.dart';
+import 'package:catsBreed/domain/datasources/cat_network_datasource.dart';
+import 'package:catsBreed/domain/entities/cat.dart';
+import 'package:catsBreed/infrastructure/mappers/cat_mapper.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
@@ -25,7 +25,6 @@ class CatNetworkDatasourceImpl implements CatNetworkDatasource {
       headers: {'x-api-key': 'live_99Qe4Ppj34NdplyLW67xCV7Ds0oSLKGgcWWYnSzMJY9C0QOu0HUR4azYxWkyW2nr'},
     );
 
-
     if (response.statusCode == 200) {
       List<Cat> listCats = [];
       final List decodedJson = json.decode(response.body) as List;
@@ -35,15 +34,14 @@ class CatNetworkDatasourceImpl implements CatNetworkDatasource {
         listCats = catModels.map((oferta) => CatNetworkMapper.cataModelToEntity(oferta)).toList();
 
       } catch (e) {
-        debugPrint(e.toString());
-        return left(ErrorMessages.responseNotMapped);
+        // debugPrint(e.toString());
+        return Left(ErrorMessages.responseNotMapped);
       }
 
       return Right(listCats);
 
     } else {
-      return left(ErrorMessages.serverError);
-      throw Exception();
+      return Left(ErrorMessages.serverError);
     }
   }
 }

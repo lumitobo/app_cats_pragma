@@ -24,7 +24,7 @@ class CatCardWidget extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(cat.name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                  Expanded(child: Text(cat.name, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold))),
                   TextButton(
                     onPressed: () {
                       context.push('/cat', extra: cat);

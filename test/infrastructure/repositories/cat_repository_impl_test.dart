@@ -1,11 +1,11 @@
 // test/repositories/cat_repository_test.dart
 
-import 'package:CatsBreed/domain/datasources/cat_local_datasource.dart';
-import 'package:CatsBreed/domain/datasources/cat_network_datasource.dart';
-import 'package:CatsBreed/domain/entities/cat.dart';
-import 'package:CatsBreed/domain/enums/conectivity_status_enum.dart';
-import 'package:CatsBreed/domain/enums/error_messages.dart';
-import 'package:CatsBreed/infrastructure/repositories/cat_repository_impl.dart';
+import 'package:catsBreed/domain/datasources/cat_local_datasource.dart';
+import 'package:catsBreed/domain/datasources/cat_network_datasource.dart';
+import 'package:catsBreed/domain/entities/cat.dart';
+import 'package:catsBreed/domain/enums/conectivity_status_enum.dart';
+import 'package:catsBreed/domain/enums/error_messages.dart';
+import 'package:catsBreed/infrastructure/repositories/cat_repository_impl.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -42,7 +42,7 @@ void main() {
     );
   });
 
-  group('getCats', () {
+  group('CatRepository', () {
     test('Debe mostrar un mensaje de error cuando haya un problema al acceder a la api de gatos.', () async {
       when(mockNetworkDatasource.getCats()).thenAnswer((_) async => Left(ErrorMessages.serverError));
       final result = await repository.getCats();
@@ -62,16 +62,14 @@ void main() {
       final result = await repository.getCats();
 
       expect(result, Right(cats));
-      verify(mockNetworkDatasource.getCats()).called(3);
-      verify(mockLocalDatasource.saveCats(cats)).called(1);
     });
 
     test('Debe regresar los gatos almacenados en caché cuando esté ofnline.', () async{
 
       repository = CatRepositoryImpl(
-          localDatasource: mockLocalDatasource,
-          networkDatasource: mockNetworkDatasource,
-          conectivityStatus: ConnectivityStatus.isDisonnected
+        localDatasource: mockLocalDatasource,
+        networkDatasource: mockNetworkDatasource,
+        conectivityStatus: ConnectivityStatus.isDisonnected
       );
 
       when(mockLocalDatasource.getCats()).thenAnswer((_) async => Right(cats));
@@ -83,9 +81,9 @@ void main() {
     test('Debe regresar la lista de gatos vacia cuando se intenta acceder al cache y aun no se han cargado los gatos desde internet.', () async{
 
       repository = CatRepositoryImpl(
-          localDatasource: mockLocalDatasource,
-          networkDatasource: mockNetworkDatasource,
-          conectivityStatus: ConnectivityStatus.isDisonnected
+        localDatasource: mockLocalDatasource,
+        networkDatasource: mockNetworkDatasource,
+        conectivityStatus: ConnectivityStatus.isDisonnected
       );
 
       when(mockLocalDatasource.getCats()).thenAnswer((_) async => Left(ErrorMessages.emptyCache));

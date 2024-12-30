@@ -1,5 +1,5 @@
-import 'package:CatsBreed/domain/datasources/cat_local_datasource.dart';
-import 'package:CatsBreed/presentation/providers/sharedPreferencesProvider.dart';
+import 'package:catsBreed/domain/datasources/cat_local_datasource.dart';
+import 'package:catsBreed/presentation/providers/sharedPreferencesProvider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../domain/datasources/cat_network_datasource.dart';

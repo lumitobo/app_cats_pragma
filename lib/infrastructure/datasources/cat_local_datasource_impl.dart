@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:CatsBreed/domain/datasources/cat_local_datasource.dart';
-import 'package:CatsBreed/domain/entities/cat.dart';
-import 'package:CatsBreed/infrastructure/mappers/cat_mapper.dart';
+import 'package:catsBreed/domain/datasources/cat_local_datasource.dart';
+import 'package:catsBreed/domain/entities/cat.dart';
+import 'package:catsBreed/infrastructure/mappers/cat_mapper.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -28,22 +28,27 @@ class CatLocalDatasourceImpl implements CatLocalDatasource {
         listCats = catModels.map((oferta) => CatNetworkMapper.cataModelToEntity(oferta)).toList();
 
       } catch (e) {
-        debugPrint(e.toString());
-        return left(ErrorMessages.responseNotMapped);
+        // debugPrint(e.toString());
+        return Left(ErrorMessages.responseNotMapped);
       }
 
       return Right(listCats);
 
     } else {
-      return left(ErrorMessages.emptyCache);
+      return Left(ErrorMessages.emptyCache);
     }
   }
 
   @override
   Future<bool> saveCats(List<Cat> cats) {
-    List catModelsToJson = cats.map<Map<String, dynamic>>((catModel) => catModel.toJson()).toList();
-    sharedPreferences.setString('cats', json.encode(catModelsToJson));
-    return Future.value(true);
+
+    try{
+      List catModelsToJson = cats.map<Map<String, dynamic>>((catModel) => catModel.toJson()).toList();
+      return sharedPreferences.setString('cats', json.encode(catModelsToJson));
+    }catch (e) {
+      return Future.value(false);
+    }
+
   }
 
 
